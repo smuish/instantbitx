@@ -53,7 +53,14 @@
             <div class="container-fluid">
                 <div class="row">
                     
-                    <?php include($_GET['page'].".php"); ?>
+                    <?php 
+                    if(!isset($_GET['page'])){
+                        include("home.php");
+                    }else{
+                    include($_GET['page'].".php"); 
+                    }
+                    
+                    ?>
                 </div>
             </div>
         </div>
@@ -66,7 +73,7 @@
 
                         <li>
                             <a href="#">
-                                Home
+                               All rights reserved
                             </a>
                         </li>
                     </ul>

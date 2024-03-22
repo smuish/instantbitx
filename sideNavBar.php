@@ -5,7 +5,14 @@
         Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
     -->
 
-    <?php $page = htmlentities(trim($_GET['page'])); ?>
+    <?php 
+    if(!isset($_GET['page'])){
+
+        $page = "home";
+    }else{
+    $page = htmlentities(trim($_GET['page'])); 
+    }
+    ?>
 
         <div class="sidebar-wrapper">
             <div class="logo">
@@ -15,7 +22,7 @@
             </div>
 
             <ul class="nav">
-                <li class="<?php echo $page == "home" ? "active": ""; ?>">
+                <li class="<?php if($page == "home" || $page == ""){echo "active"; } ?>">
                     <a href=".?page=home">
                     <i class="ti-view-grid"></i>
                         <p>Dashboard</p>
@@ -36,111 +43,16 @@
                 </li>
                 <li class="<?php echo $page == "sell" ? "active": ""; ?>">
                     <a href=".?page=sell">
-                    <i class="ti-panel"></i>
+                    <i class="ti-money"></i>
                         <p>Sell</p>
                     </a>
                 </li>
                 <li class="<?php echo $page == "orders" ? "active": ""; ?>">
                     <a href=".?page=orders">
-                    <i class="ti-panel"></i>
+                    <i class="ti-receipt"></i>
                         <p>My Orders</p>
                     </a>
                 </li>
-                <li data-toggle="collapse" data-target="#pages">
-                    <a href="#">
-                        <i class="ti-bar-chart"></i>
-                        <p>Manage Trade</p>
-                    </a>
-                    <div class="collapse" id="pages">
-                        
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="orders.php">All</a>
-                            </li>
-                            <li>
-                                <a href="">Buy</a>
-                            </li>
-                            <li>
-                                <a href="">Sell</a>
-                            </li>
-                            <li>
-                                <a href="">Completed</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </li>
-
-                  <li data-toggle="collapse" data-target="#post">
-                    <a href="#">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Customers</p>
-                    </a>
-                    <div class="collapse" id="post">
-                        
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="company-list.php">Customers</a>
-                            </li>
-                            <li>
-                                <a href="">Pending KYC</a>
-                            </li>
-                            <li>
-                                <a href="">KYC Log</a>
-                                <li>
-                                <a href="">Send Email</a>
-                            </li>
-                            </li>
-                        </ul>
-
-                    </div>
-                </li>
-
-                <li data-toggle="collapse" data-target="#pages">
-                    <a href="#">
-                        <i class="ti-files"></i>
-                        <p>API Settings</p>
-                    </a>
-                    <div class="collapse" id="pages">
-                        
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="orders.php">Api Settings</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </li>
-
-                  <li data-toggle="collapse" data-target="#post">
-                    <a href="#">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Users</p>
-                    </a>
-                    <div class="collapse" id="post">
-                        
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="company-list.php">All Users</a>
-                            </li>
-                            <li>
-                                <a href="">Add New User</a>
-                            </li>
-                            <li>
-                                <a href="">Tags</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </li>
-
-                 <li>
-                    <a href="">
-                        <i class="ti-files"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-
             </ul>
         </div>
     </div>
