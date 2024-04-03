@@ -2233,7 +2233,7 @@ textarea.form-control {
 .card label {
     font-size: 14px;
     font-weight: 400;
-    color: #ffffff;
+    color: #5f5f5f;
     margin-bottom: 0px;
 }
 
@@ -3287,12 +3287,12 @@ textarea.form-control {
     .card form [class*="col-"] {
         padding: 6px;
     }
-    .card form [class*="col-"]:first-child {
+    /* .card form [class*="col-"]:first-child {
         padding-left: 15px;
     }
     .card form [class*="col-"]:last-child {
         padding-right: 15px;
-    }
+    } */
 }
 
 /*          Changes for small display      */
@@ -4021,3 +4021,9 @@ svg {
 .process-step{display:table-cell;text-align:center;position:relative}
 .process-step p{margin-top:4px}
 .btn-circle{width:60px;height:60px;text-align:center;font-size:12px;background-color:#ffffff;}
+
+.inner-menu{
+
+    display: flex;
+    justify-content: space-between;
+}
