@@ -56,7 +56,7 @@
 
                   <li data-toggle="collapse" data-target="#cms">
                     <a href="#">
-                        <i class="ti-view-list-alt"></i>
+                        <i class="ti-id-badge"></i>
                         <p>Customers</p>
                     </a>
                     <div class="collapse" id="cms">
@@ -64,9 +64,6 @@
                         <ul class="sub-menu">
                             <li>
                                 <a href=".?page=customerlist">Customers</a>
-                            </li>
-                            <li>
-                                <a href=".?page=customerlist&action=pendingkyc">Pending KYC verification</a>
                             </li>
                             <li>
                                 <a href=".?page=sendmail">Send Email</a>
@@ -77,25 +74,9 @@
                     </div>
                 </li>
 
-                <li data-toggle="collapse" data-target="#apis">
-                    <a href="#">
-                        <i class="ti-files"></i>
-                        <p>API Settings</p>
-                    </a>
-                    <div class="collapse" id="apis">
-                        
-                        <ul class="sub-menu">
-                            <li>
-                                <a href=".?page=apisettings">Api Settings</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </li>
-
                   <li data-toggle="collapse" data-target="#usm">
                     <a href="#">
-                        <i class="ti-view-list-alt"></i>
+                    <i class="ti-user"></i>
                         <p>Users</p>
                     </a>
                     <div class="collapse" id="usm">
@@ -115,9 +96,28 @@
                     </div>
                 </li>
 
+                <li data-toggle="collapse" data-target="#dos">
+                    <a href="#">
+                    <i class="ti-layout-list-thumb"></i>
+                        <p>Daily Orders</p>
+                    </a>
+                    <div class="collapse" id="dos">
+                        
+                        <ul class="sub-menu">
+                            <li>
+                                <a href=".?page=dailyorders">All</a>
+                            </li>
+                            <li>
+                            <a href=".?page=neworderform">New Order</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+
                  <li data-toggle="collapse" data-target="#ss">
                     <a href="#">
-                        <i class="ti-files"></i>
+                        <i class="ti-settings"></i>
                         <p>Settings</p>
                     </a>
                     <div class="collapse" id="ss">
@@ -128,6 +128,12 @@
                             </li>
                              <li>
                                 <a href=".?page=emailsettings">Email Settings</a>
+                            </li>
+                            <li>
+                                <a href=".?page=apisettings">Api Settings</a>
+                            </li>
+                            <li>
+                                <a href=".?page=apisettings">KYC</a>
                             </li>
                         </ul>
 
