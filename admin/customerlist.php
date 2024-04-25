@@ -1,3 +1,13 @@
+<?php 
+
+include_once("../dashboard/config.php");
+include_once("Customer.php");
+
+$ct = new Customer();
+
+$customerslist = $ct->getCustomers();
+
+?>
 <style>
 .icons{
 
@@ -18,33 +28,31 @@
                                         <tr>
                                             <th></th>
 											<th>Username</th>
+                                            <th> E-mail</th>
                                             <th>Date created</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <?php if(mysqli_affected_rows($GLOBALS['con']) > 0){
+                                            
+                                            
+                                            foreach($customerslist as $customer){?>
+
+                                            <tr>
                                             <td><input type="checkbox"></td>
-                                        	<td><a href=".?page=customerdetails">Bitcoin</a></td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
+                                        	<td><a href=".?page=customerdetails"><?php echo $customer['userName']; ?></a></td>
+                                            <td><?php echo $customer['email']; ?></td>
+                                            <td><?php echo $customer['dateJoined']; ?></td>
+                                        	<td><td><?php echo $customer['status'] == 0 ? "<span>Pending</span>" : "<span>Verified</span>"; ?></td></td>
                                             <td></td>
                                         </tr>
-										<tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td><a href=".?page=customerdetails">Bitcoin</a></td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
-                                            <td></td>
-                                        </tr>
-										<tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td><a href=".?page=customerdetails">Bitcoin</a></td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
-                                            <td></td>
-                                        </tr>
+                                        
+                                        
+                                       <?php } }else{?>
+                                    
+                                    <?php } ?>
                                     </tbody>
                                 </table>
 

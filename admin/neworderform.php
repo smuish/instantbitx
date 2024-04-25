@@ -7,7 +7,7 @@
                             </div>
                             <div class="content">
                                 <form method="POST">
-                                    <div class="row">
+                                    <div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Payment Mode:</label>

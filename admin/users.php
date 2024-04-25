@@ -1,3 +1,21 @@
+<?php 
+
+include_once("../dashboard/config.php");
+include_once("User.php");
+
+$user = new User();
+
+$userlist = $user->getUserList();
+
+?>
+
+
+<style>
+.icons{
+
+    display:none;
+}
+</style>
 <div class="col-md-12">
     <div class="card">
     <div class="header">
@@ -19,33 +37,29 @@
                                         <tr>
                                             <th></th>
 											<th>Username</th>
+                                            <th>E-mail</th>
                                             <th>Date created</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+
+                                        if(mysqli_affected_rows($GLOBALS['con']) > 0){
+                                            
+                                            foreach($userlist as $list){?>
+                                        
                                         <tr>
                                             <td><input type="checkbox"></td>
-                                        	<td>Bitcoin</td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
+                                        	<td><?php echo $list['username']; ?></td>
+                                            <td><?php echo $list['email']; ?></td>
+                                            <td><?php echo $list['dateAdded']; ?></td>
+                                        	<td><span><?php echo $list['status'] == 0 ? "Inactive" : " Active"; ?></span></td>
                                             <td></td>
                                         </tr>
-										<tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td>Bitcoin</td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
-                                            <td></td>
-                                        </tr>
-										<tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td>Bitcoin</td>
-                                            <td>20-08-2023</td>
-                                        	<td><span>Pending</span></td>
-                                            <td></td>
-                                        </tr>
+                                    
+                                    <?php } } ?>
                                     </tbody>
                                 </table>
 

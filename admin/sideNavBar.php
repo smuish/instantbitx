@@ -32,7 +32,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li data-toggle="collapse" data-target="#mts">
+                <li data-toggle="collapse" data-target="#mts" class="<?php echo $page == "orders" ? "active": ""; ?>">
                     <a href="#">
                         <i class="ti-bar-chart"></i>
                         <p>Transactions</p>
@@ -54,7 +54,7 @@
                     </div>
                 </li>
 
-                  <li data-toggle="collapse" data-target="#cms">
+                  <li data-toggle="collapse" data-target="#cms" class="<?php echo ($page == "customerlist" || $page == "sendmail") ? "active": ""; ?>">
                     <a href="#">
                         <i class="ti-id-badge"></i>
                         <p>Customers</p>
@@ -74,7 +74,7 @@
                     </div>
                 </li>
 
-                  <li data-toggle="collapse" data-target="#usm">
+                  <li data-toggle="collapse" data-target="#usm" class="<?php echo ($page == "users" || $page == "newuser" || $page == "userroles") ? "active": ""; ?>">
                     <a href="#">
                     <i class="ti-user"></i>
                         <p>Users</p>
@@ -96,7 +96,7 @@
                     </div>
                 </li>
 
-                <li data-toggle="collapse" data-target="#dos">
+                <li data-toggle="collapse" data-target="#dos" class="<?php echo ($page == "neworderform" || $page == "dailyorders") ? "active": ""; ?>">
                     <a href="#">
                     <i class="ti-layout-list-thumb"></i>
                         <p>Daily Orders</p>
@@ -115,7 +115,7 @@
                     </div>
                 </li>
 
-                 <li data-toggle="collapse" data-target="#ss">
+                 <li data-toggle="collapse" data-target="#ss" class="<?php echo ($page == "emailsettings" || $page == "general-settings" || $page == "apisettings" || $page == "identity") ? "active": ""; ?>">
                     <a href="#">
                         <i class="ti-settings"></i>
                         <p>Settings</p>
@@ -133,7 +133,7 @@
                                 <a href=".?page=apisettings">Api Settings</a>
                             </li>
                             <li>
-                                <a href=".?page=apisettings">KYC</a>
+                                <a href=".?page=identity">KYC</a>
                             </li>
                         </ul>
 
