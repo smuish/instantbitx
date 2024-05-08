@@ -42,6 +42,12 @@ class Customer{
         return;
     }
 
+    public function deleteNumber($customer){
+
+        $delnumber = mysqli_query($GLOBALS['con'], "DELETE FROM customer_numbers WHERE email = '$customer->email' AND number = '$customer->number'") or die(mysqli_error($GLOBAL['con']));
+        return;
+    }
+
     public function getThirdParty($customer){
 
         

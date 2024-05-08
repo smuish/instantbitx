@@ -46,4 +46,12 @@ switch($action){
         $newuser = $user->newUser($data);
     break;
 
+    case "deleteNumber":
+        include_once("Customer.php");
+        $cs = new Customer();
+        $data = json_decode($_GET['data']);
+        $delcs = $cs->deleteNumber($data);
+       echo "deleted";
+        break;
+
 }

@@ -81,7 +81,29 @@
                                     <div class="clearfix"></div>
                             </div>
                         </div>
-
+                        <div class="card">
+                            <div class="header">
+                                <h3 class="title">KYC Settings</h3>
+                                
+                            </div>
+                            <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Acceptable documents</label>
+                                                <input type="hidden" value="<?php echo $bkyv != "" ? $kycid : ""; ?>"  id="kycid" />
+                                                <input type="check" class="form-control border-input" id="smtpvl" placeholder="API Key" value="<?php echo $bkyc == "" ? "0" : $bkyc; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                <button  class="btn btn-default" id="kyc"><i class="ti-save" ></i>&nbsp;Save</button>
+                                                </div>
+                                            
+                                        </div>
+                                      </div>
+                                    
+                                    <div class="clearfix"></div>
+                            </div>
+                        </div>
 
 
 

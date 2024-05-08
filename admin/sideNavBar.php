@@ -32,12 +32,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li data-toggle="collapse" data-target="#mts" class="<?php echo $page == "orders" ? "active": ""; ?>">
-                    <a href="#">
+                <li class="<?php echo $page == "orders" ? "active": ""; ?>">
+                    <a href=".?page=orders">
                         <i class="ti-bar-chart"></i>
                         <p>Transactions</p>
                     </a>
-                    <div class="collapse" id="mts">
+                    <!-- <div class="collapse" id="mts">
                         
                         <ul class="sub-menu">
                             <li>
@@ -51,7 +51,7 @@
                             </li>
                         </ul>
 
-                    </div>
+                    </div> -->
                 </li>
 
                   <li data-toggle="collapse" data-target="#cms" class="<?php echo ($page == "customerlist" || $page == "sendmail") ? "active": ""; ?>">
@@ -115,12 +115,12 @@
                     </div>
                 </li>
 
-                 <li data-toggle="collapse" data-target="#ss" class="<?php echo ($page == "emailsettings" || $page == "general-settings" || $page == "apisettings" || $page == "identity") ? "active": ""; ?>">
-                    <a href="#">
+                 <li class="<?php echo ($page == "emailsettings" || $page == "general-settings" || $page == "apisettings" || $page == "identity") ? "active": ""; ?>">
+                    <a href=".?page=general-settings">
                         <i class="ti-settings"></i>
                         <p>Settings</p>
                     </a>
-                    <div class="collapse" id="ss">
+                    <!-- <div class="collapse" id="ss">
                         
                         <ul class="sub-menu">
                             <li>
@@ -137,7 +137,7 @@
                             </li>
                         </ul>
 
-                    </div>
+                    </div> -->
                 </li>
 
             </ul>
