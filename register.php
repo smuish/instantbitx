@@ -52,11 +52,11 @@
                 <div class="ath-body">
                     <h5 class="ath-heading title">Sign Up <small class="tc-default">Create New Instantbitx Account</small></h5>
                     <form action="" method="POST">
-                        <div class="field-item">
+<!--                         <div class="field-item">
                             <div class="field-wrap">
                                 <input type="text" class="input-bordered" name="username" placeholder="Username" required>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="field-item">
                             <div class="field-wrap">
                                 <input type="email" class="input-bordered" name="email" placeholder="Your Email" required>
@@ -91,7 +91,7 @@
         </main>
     </div>
     <!-- Preloader -->
-    <div class="preloader"><span class="spinner spinner-round"></span></div>
+    <!-- <div class="preloader"><span class="spinner spinner-round"></span></div> -->
     <!-- JavaScript -->
     <script src="assets/js/jquery.bundle.js?ver=210"></script>
     <script src="assets/js/scripts.js?ver=210"></script>

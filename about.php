@@ -330,7 +330,7 @@
             </footer>
     </div>
     <!-- Preloader -->
-    <div class="preloader"><span class="spinner spinner-round"></span></div>
+    <!-- <div class="preloader"><span class="spinner spinner-round"></span></div> -->
     <!-- JavaScript -->
     <script src="assets/js/jquery.bundle.js?ver=210"></script>
     <script src="assets/js/scripts.js?ver=210"></script>

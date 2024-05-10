@@ -371,7 +371,7 @@
             </footer>
         </div>
         <!-- Preloader -->
-         <div class="preloader preloader-alt no-split"><span class="spinner spinner-alt"><img class="spinner-brand" src="images/logo-full-white.png" alt=""></span></div>
+         <!-- <div class="preloader preloader-alt no-split"><span class="spinner spinner-alt"><img class="spinner-brand" src="images/logo-full-white.png" alt=""></span></div> -->
         <!-- JavaScript -->
         <script src="assets/js/jquery.bundle.js?ver=210"></script>
         <script src="assets/js/scripts.js?ver=210"></script>
