@@ -8,7 +8,7 @@ $vnumbers = $cs->getVerifiedNumbers($data);
 
 
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <style>
 
     .phclose{}
@@ -78,17 +78,89 @@ $vnumbers = $cs->getVerifiedNumbers($data);
        <label class="buysell"><input type="radio" name="kycdoc" id="kycd" value="Drivers License"> <span class="checkmark"></span>&nbsp;&nbsp;Drivers License </label>
        <label class="buysell"> <input type="radio" name="kycdoc" id="kycd" value="National Id"> <span class="checkmark"></span>&nbsp;&nbsp;National Id </label>
        <label class="buysell"> <input type="radio" name="kycdoc" id="kycd" value="Passport"> <span class="checkmark"></span>&nbsp;&nbsp;Passport </label>
-    </p>            
+    </p> 
+    
+    <div id="drl" style="display: none">
+    Drivers License
+    <span>
+        Take a picture of the front of your Drivers Lincense.
+    <input type="file" id="drlfront" class="form-control" />
+                    </span>
+
+                    <span>
+        Take a picture of the back of your Drivers Lincense.
+    <input type="file" id="drlback" class="form-control" />
+                    </span>
+    <input type="button" id="drlbtn" value="Submit document" />
+    </div>
+    <div id="naid" style="display: none">
+    National ID
+
+    <span>
+        Take a picture of the front of your National ID.
+    <input type="file" id="nafront" class="form-control" />
+    <span id="frontpv"></span>
+                    </span>
+
+                    <span>
+        Take a picture of the back of your National ID.
+    <input type="file" id="naback" class="form-control" />
+                    </span>
+                    
+    <input type="button" id="nabtn" value="Submit document" />
+    </div>
+    <div id="pps" style="display: none">
+    Passport
+    <span>
+        Take a picture of the data part of your Passport.
+    <input type="file" id="psfront" class="form-control" />
+                    </span>
+    <input type="button" id="ppsbtn" value="Submit document" />
     </div>
 </div>
 
-
-
-
 <script>
+
+document.getElementById('drlfront').addEventListener("change", previewimg)
+document.getElementById('drlfront').addEventListener("change", previewimg)
+
+function previewimg(){
+    imgsrc = document.getElementById("imgupload").files[0]
+    previewwindow = document.getElementById("preview")
+    previewwindow.style.width = "250px"
+    previewwindow.src = URL.createObjectURL(imgsrc)
+  }
+
+pm = document.querySelectorAll('#kycd')
+   
+   for(i = 0; i < pm.length; i++){
+    pm[i].addEventListener('change', togglePayment)
+   }
+   function togglePayment(){
+    if(this.value == "Drivers License"){
+
+        document.getElementById("drl").style.display = "block"
+        document.getElementById('naid').style.display = "none"
+        document.getElementById("pps").style.display = "none"
+        
+    }else if(this.value == "National Id"){
+        document.getElementById("drl").style.display = "none"
+        document.getElementById('naid').style.display = "block"
+        document.getElementById("pps").style.display = "none"
+
+    }else{
+        document.getElementById("drl").style.display = "none"
+        document.getElementById('naid').style.display = "none"
+        document.getElementById("pps").style.display = "block"
+        
+
+    }
+   
+   }
+
 function create2FAapplication(){
 
-    const data = 'to=%2B233555026671&p=%3CREQUIRED%3E&text=Dear%20customer.%20We%20want%20to%20say%20thanks%20for%20your%20trust.%20Use%20code%20MINUS10%20for%2010%20%25%20discount%20on%20your%20next%20order!';
+const data = 'to=%2B233555026671&p=%3CREQUIRED%3E&text=Dear%20customer.%20We%20want%20to%20say%20thanks%20for%20your%20trust.%20Use%20code%20MINUS10%20for%2010%20%25%20discount%20on%20your%20next%20order!';
 
 const xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
@@ -108,7 +180,8 @@ xhr.send(data);
 }
 
 
-create2FAapplication()
+//create2FAapplication()
+
     function send2FA(){
 const myHeaders = new Headers();
 myHeaders.append("Authorization", "App 3d70dc6ccc06f0039b636444d6927aac-7e379ed4-b90d-459e-9095-adfc3b473b74");

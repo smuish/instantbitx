@@ -1,10 +1,11 @@
+<style>
+
+.navbar-toggle .icon-bar{
+
+    background-color: #333333;
+}
+    </style>
 <div class="sidebar" data-background-color="white" data-active-color="danger">
-
-    <!--
-        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-    -->
-
     <?php
     
         if(isset($_GET['page'])){

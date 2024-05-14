@@ -3,12 +3,12 @@ class Customer{
 
     public function register($data){
 
-       return mysqli_query($GLOBALS['con'], "INSERT INTO customer (username,password,email,dateJoined,status) VALUES('$data[username]','$data[password]','$data[email]',NOW(),0)") or die(mysqli_error($GLOBALS['con']));
+       return mysqli_query($GLOBALS['con'], "INSERT INTO customer (password,email,dateJoined,status) VALUES(PASSWORD('$data[password]'),'$data[email]',NOW(),0)") or die(mysqli_error($GLOBALS['con']));
     }
 
 
     public function signin($data){
-        $sn = mysqli_query($GLOBALS['con'],"SELECT * FROM customer where userName  = '$data[username]' AND password = '$data[password]'") or die(mysqli_error($GLOBALS['con']));
+        $sn = mysqli_query($GLOBALS['con'],"SELECT * FROM customer WHERE email  = '$data[email]' AND password = PASSWORD('$data[password]')") or die(mysqli_error($GLOBALS['con']));
         $a_sn = mysqli_affected_rows($GLOBALS['con']);
         if($a_sn > 0){
             return $sn;
