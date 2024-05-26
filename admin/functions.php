@@ -51,7 +51,19 @@ switch($action){
         $cs = new Customer();
         $data = json_decode($_GET['data']);
         $delcs = $cs->deleteNumber($data);
-       echo "deleted";
+        echo "deleted";
+        break;
+    
+    case "checktransid":
+        include_once("Helper.php");
+        $hp = new Helper();
+        $trans = $_GET['transid'];
+
+        $check = $hp->transIDchecker($trans);
+        if($check)
+        echo "Transaction ID Already used";
+        else
+        echo 0;
         break;
 
 }

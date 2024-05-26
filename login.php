@@ -54,7 +54,7 @@
                     <form action="" method="POST">
                         <div class="field-item">
                             <div class="field-wrap">
-                                <input type="text" class="input-bordered" name="username" placeholder="Your Username">
+                                <input type="text" class="input-bordered" name="email" placeholder="Your email">
                             </div>
                         </div>
                         <div class="field-item">
@@ -73,13 +73,8 @@
                         </div>
                         <button class="btn btn-primary btn-block btn-md" name="submit">Sign In</button>
                     </form>
-                    <div class="sap-text"><span>Or Sign In With</span></div>
-                    <ul class="row gutter-20px gutter-vr-20px">
-                        <li class="col"><a href="#" class="btn btn-md btn-facebook btn-block"><em class="icon fab fa-facebook-f"></em><span>Facebook</span></a></li>
-                        <li class="col"><a href="#" class="btn btn-md btn-google btn-block"><em class="icon fab fa-google"></em><span>Google</span></a></li>
-                    </ul>
                 </div>
-                <div class="ath-note text-center tc-light"> Don’t have an account? <a href="page-register.html"> <strong>Sign up here</strong></a>
+                <div class="ath-note text-center tc-light"> Don’t have an account? <a href="register.php"> <strong>Sign up here</strong></a>
                 </div>
             </div>
         </main>

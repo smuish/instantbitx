@@ -66,9 +66,32 @@ class Customer{
         
     }
 
+      public function getDailytransactionId($transId){
+        $order = mysqli_query($GLOBALS['con'], "SELECT * FROM dailysales WHERE transactionId = $transId") or die(mysqli_error($GLOBALS['con']));
+
+        return $order;
+
+    }
+
+    public function addPayment($data){
+        $transidcheck = mysqli_fetch_assoc($this->getDailytransactionId($data['transactionNumber']));
+        if(mysqli_affected_rows($GLOBALS['con']) > 0){
+
+            $setorderNumber = mysqli_query($GLOBALS['con'],"UPDATE dailysales SET orderNumber = '$data[orderNumber]' WHERE transactionId = '$data[transactionNumber]'");
+        }
+        $addpayment = mysqli_query($GLOBALS['con'], "UPDATE orders set transactionId = '$data[transactionNumber]', transactionStatus = '$data[transactionStatus]' WHERE orderNumber = '$data[orderNumber]'") or die(mysqli_error($GLOBALS['con']));
+        return;
+    }
+
     public function getCustomers(){
 
         $ct = mysqli_query($GLOBALS['con'], "SELECT * FROM customer");
+        return $ct;
+    }
+
+    public function getCustomer($customerId){
+
+        $ct = mysqli_query($GLOBALS['con'], "SELECT * FROM customer WHERE id = '$customerId'");
         return $ct;
     }
 

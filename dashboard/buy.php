@@ -3,10 +3,27 @@
 include_once("config.php");
 include_once("../admin/Customer.php");
 include_once("../admin/Helper.php");
+include_once("../admin/Order.php");
 $hp = new Helper();
 $cs = new Customer();
+
 $data['email'] = $_SESSION['email'];
 $vnumbers = $cs->getVerifiedNumbers($data);
+
+if(isset($_POST['sbtr'])){
+
+    $data['orderNumber'] = htmlspecialchars_decode(trim($_POST['edit']));
+    $data['transactionNumber'] = htmlspecialchars_decode(trim($_POST['trid']));
+    $data['transactionStatus'] = "Payment Added";
+    $cs -> addPayment($data);
+}
+if(isset($_GET['edit'])){
+    $od = new Order();
+    $orderId = htmlspecialchars_decode(trim($_REQUEST['edit']));
+    $order = mysqli_fetch_assoc($od->getOrder($orderId));
+
+
+}
 
 ?>
 <input type="hidden" id="csid" value="<?php echo $_SESSION['customerId']; ?>" />
@@ -22,6 +39,7 @@ $vnumbers = $cs->getVerifiedNumbers($data);
  <div class="row">
   <div class="process">
    <div class="process-row nav nav-tabs">
+<?php if(!isset($_GET['edit'])){?>
     <div class="process-step">
      <button type="button" class="btn btn-info btn-circle" data-toggle="tab" href="#menu1"><i class="fa fa-info fa-2x"></i></button>
      <p><small>Buy<br />Amount</small></p>
@@ -30,8 +48,9 @@ $vnumbers = $cs->getVerifiedNumbers($data);
      <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu2"><i class="fa fa-file-text-o fa-2x"></i></button>
      <p><small>Payment<br />Method</small></p>
     </div>
+    <?php } ?>
     <div class="process-step">
-     <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu3"><i class="fa fa-ticket fa-2x"></i></button>
+     <button type="button" class="btn <?php if(!isset($_GET['edit'])){ echo "btn-default"; }else{echo "btn-info";} ?> btn-circle" data-toggle="tab" href="#menu3"><i class="fa fa-ticket fa-2x"></i></button>
      <p><small>Transaction<br />Summary</small></p>
     </div>
     <div class="process-step">
@@ -40,7 +59,7 @@ $vnumbers = $cs->getVerifiedNumbers($data);
     </div>
     <div class="process-step">
      <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu5"><i class="fa fa-cogs fa-2x"></i></button>
-     <p><small>Confirm<br />Payment</small></p>
+     <p><small>Submit<br />Payment</small></p>
     </div>
     <div class="process-step">
      <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu6"><i class="fa fa-cogs fa-2x"></i></button>
@@ -53,6 +72,7 @@ $vnumbers = $cs->getVerifiedNumbers($data);
    </div>
   </div>
   <div class="tab-content">
+<?php if(!isset($_GET['edit'])){?>
    <div id="menu1" class="tab-pane fade active in">
     <div style="max-width: 450px; border: 1px dashed #ccc; padding: 10px; border-radius: 10px; margin: 0 auto;">
     <h3>How much do you want to buy?</h3>
@@ -184,31 +204,33 @@ $vnumbers = $cs->getVerifiedNumbers($data);
     </ul>
 </div>
    </div>
-   <div id="menu3" class="tab-pane fade" style="text-align:center">
+
+   <?php } ?>
+   <div id="menu3" class="tab-pane fade <?php if(isset($_GET['edit'])){ echo "active in"; } ?>" style="text-align:center">
     <div class="" style="max-width: 450px; text-align: left; border: 1px dashed #cccccc; margin: 0 auto; padding:20px; border-radius: 10px">
     <h3>Transaction Summary</h3>
     <div>
         
-       <input type="hidden" id="ordernum" value="" />
-        <p><strong>Order Number:</strong><span id="ordernumber"></span></p>
+       <input type="hidden" id="ordernum" value="<?php if(isset($_GET['edit'])){ echo $order['orderNumber']; } ?>" />
+        <p><strong>Order Number:</strong><span id="ordernumber"><?php if(isset($_GET['edit'])){ echo $order['orderNumber']; } ?></span></p>
        
-        <p><strong>Payment Method:</strong> <span id="pmmethod"></span></p>
+        <p><strong>Payment Method:</strong> <span id="pmmethod"><?php if(isset($_GET['edit'])){ echo $order['paymentType']; } ?></span></p>
         
         <div id="mnumlabel">
-            <p><strong>Network: </strong><span id="networkname"></span></p>
+            <p><strong>Network: </strong><span id="networkname"><?php if(isset($_GET['edit'])){ echo $order['network']; } ?></span></p>
 
-        <p><strong>Mobile Number: </strong> <span id="mnum"></span> </p></div>
-        <p><strong>Coin Type:</strong> <span id="tsct"></span> </p>
-        <p><strong>Buy Amount (USD):</strong> <span id="mpdetailsusd"> 0.00 </span> </p>
-        <p><strong>Buy Amount (GHS):</strong> <span id="mpdetailsghc"> 0.00 </span> </p>
-        <p><strong>Wallet Address:</strong><span id="tswalletaddress"> </span></p>
-        <p><input type="button" class="btn btn-warning form-control" id="placeorderbtn" value="Place buy order" /></p>
+        <p><strong>Mobile Number: </strong> <span id="mnum"> <?php if(isset($_GET['edit'])){ echo $order['paymentNumber']; } ?></span></p></div>
+        <p><strong>Coin Type:</strong> <span id="tsct"><?php if(isset($_GET['edit'])){ echo $order['coinType']; } ?></span> </p>
+        <p><strong>Buy Amount (USD):</strong> <span id="mpdetailsusd"> <?php if(isset($_GET['edit'])){ echo $order['paymentAmountUSD']; }else{ echo "0.00"; } ?> </span> </p>
+        <p><strong>Buy Amount (GHS):</strong> <span id="mpdetailsghc"> <?php if(isset($_GET['edit'])){ echo $order['paymentAmountGHC']; }else{ echo "0.00"; } ?> </span> </p>
+        <p><strong>Wallet Address:</strong><span id="tswalletaddress"><?php if(isset($_GET['edit'])){ echo $order['walletAddress']; } ?> </span></p>
+        <?php if(!isset($_GET['edit'])){ ?><p><input type="button" class="btn btn-warning form-control" id="placeorderbtn" value="Place buy order" /></p><?php } ?>
         
     </div> 
     </div>
     <div class="col-lg-12">
     <ul class="list-unstyled list-inline pull-right">
-     <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-chevron-left"></i> Back</button></li>
+     <?php if(!isset($_GET['edit'])){?><li><button type="button" class="btn btn-default prev-step"><i class="fa fa-chevron-left"></i> Back</button></li><?php } ?>
      <li><button type="button" class="btn btn-info next-step">Next <i class="fa fa-chevron-right"></i></button></li>
     </ul>
     </div>
@@ -218,8 +240,8 @@ $vnumbers = $cs->getVerifiedNumbers($data);
     <h3>Make Payment</h3>
     <div>
         <p>Make Momo payment using this reference Number</p>
-        <p>Reference: <strong style="font-size:25px"><span id="rfnm"></span></strong><input type="hidden" id="rffnumber" value='' /> </p>
-        
+        <p>Reference: <strong style="font-size:18px"><span id="rfnm"><?php if(isset($_GET['edit'])){ echo $order['reference']; } ?></span></strong><input type="hidden" id="rffnumber" value='<?php if(isset($_GET['edit'])){ echo ""; } ?>' /> </p>
+        <p>Amount to Pay: <strong style="font-size:18px"><span><?php if(isset($_GET['edit'])){ echo $order['paymentAmountGHC']; }?></span></strong></p>
     </div> 
     </div>
     <div class="col-lg-12">
@@ -231,15 +253,16 @@ $vnumbers = $cs->getVerifiedNumbers($data);
    </div>
    <div id="menu5" class="tab-pane fade" style="text-align:center">
     <div style="max-width: 450px; border: 1px dashed #ccc; text-align: left; padding:10px; border-radius: 10px; margin: 0 auto">
-    <h3>Confirm Payment</h3>
+    <h3>Submit Payment</h3>
     <div>
+        <form action="?page=buy&edit=<?php if(isset($_GET['edit'])) echo $_GET['edit']; ?>" method="POST">
         <p>Submit your payment receipt:</p>
         <div class="form-group">
-        <input type="text" name="trid" id="trid" class="form-control" placeholder="Mobile money Transaction ID" value="" />
+            <input type="hidden" name="edit" id="edit" value="<?php if(isset($_GET['edit'])) echo $order['orderNumber']; ?>" />
+        <input type="text" name="trid" id="trid" class="form-control" placeholder="Mobile money Transaction ID" value="<?php if(isset($_GET['edit']))echo $order['transactionId']; ?>" />
         </div>
-
-        <p><input type="button" class="btn btn-warning" value="Submit payment" /></p>
-        
+        <p><input type="submit" class="btn btn-info" name="sbtr" id="sbtr" value="Submit payment" disabled/></p>
+        </form>
     </div> 
     </div>
     <div class="col-lg-12">
@@ -277,7 +300,33 @@ $vnumbers = $cs->getVerifiedNumbers($data);
         </div>
     </div>
 </div>
+<script>
+url = "../admin/functions.php"
+    data = {};
+    data.reference = document.getElementById('rffnumber').value
+    function httprequest(url, query){
+        rp = new XMLHttpRequest()
+        rp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
 
+                if(document.getElementById('trnidbox')){
+                    if(this.responseText != 0){
+                        document.getElementById('trnidbox').innerHTML = this.responseText
+                    document.getElementById('sbtr').disabled = true
+                    return
+                    }
+                    
+                    document.getElementById('sbtr').disabled = false
+                    
+                }
+           
+            }
+        }
+        rp.open("GET",url+query)
+        rp.send()
+    }
+    </script>
+<?php if(!isset($_GET['edit'])){?>
 <script>
 
 const randomAlphaNumeric = length => {
@@ -288,21 +337,6 @@ const randomAlphaNumeric = length => {
   });
   return s.slice(0, length);
 };
-    
-
-    url = "../admin/functions.php"
-    data = {};
-    data.reference = document.getElementById('rffnumber').value
-    function httprequest(url, query){
-        rp = new XMLHttpRequest()
-        rp.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                alert(this.responseText)
-            }
-        }
-        rp.open("GET",url+query)
-        rp.send()
-    }
 
     monm = document.querySelectorAll('#mmoney')
     for(n = 0; n < monm.length; n++){
@@ -372,9 +406,8 @@ const randomAlphaNumeric = length => {
     data.coinType = this.value
    }
 
-
-
     document.getElementById('ordernum').value = randomAlphaNumeric(8) 
+    document.getElementById('edit').value = document.getElementById('ordernum').value
     document.getElementById('rffnumber').value = randomAlphaNumeric(10)
     document.getElementById('rfnm').innerHTML = document.getElementById('rffnumber').value
     document.getElementById('ordernumber').innerHTML = document.getElementById('ordernum').value
@@ -390,9 +423,7 @@ const randomAlphaNumeric = length => {
     data.orderNumber = document.getElementById('ordernum').value
 
     httprequest(url, "?action=placeorder&data="+JSON.stringify(data))
-    console.log(data)
-    
-
+    //console.log(data)
    }
 
 
@@ -400,6 +431,28 @@ const randomAlphaNumeric = length => {
 
    function setWalletAddress(){
     document.getElementById('tswalletaddress').innerHTML = this.value
+
+   }
+</script>
+<?php } ?>
+<script>
+   
+   document.getElementById('trid').addEventListener("focus", activatecheck)
+
+   function activatecheck(){
+    if(!document.getElementById('trnidbox')){
+        msgdiv = document.createElement('div')
+    msgdiv.id = "trnidbox"
+    msgdiv.innerHTML = this.responseText
+    this.appendChild(msgdiv)  
+    this.addEventListener("blur", checkTransaction)
+    }
+   
+   } 
+
+   function checkTransaction(){
+    //if()
+    chk = httprequest(url, "?action=checktransid&transid="+this.value)
 
    }
 </script>

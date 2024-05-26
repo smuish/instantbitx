@@ -52,4 +52,22 @@ class Helper{
     return 0;
     }
 
+    public function transIDchecker($transid){
+        $ts = mysqli_query($GLOBALS['con'], "SELECT * FROM orders WHERE transactionId = '$transid'") or die(mysqli_error($GLOBALS['con']));
+        if(mysqli_affected_rows($GLOBALS['con']) > 0)
+            return true;
+        else
+            return false;
+    
+    }
+
+
+    public function formatGHC($number,$cur){
+
+        $fmt = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+        $fmt->setTextAttribute(NumberFormatter::CURRENCY_CODE, $cur);
+        $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
+        return $fmt->formatCurrency($number, $cur);
+    }
+
 }

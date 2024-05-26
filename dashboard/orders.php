@@ -8,6 +8,8 @@
 <?php
 include_once("config.php");
 include_once("../admin/Customer.php");
+include_once("../admin/Helper.php");
+$hp = new Helper();
 $orders['orderType'] = "buy";
 $orders['start'] = 0;
 $orders['end'] = 30;
@@ -44,7 +46,6 @@ $cu = new Customer();
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>ID</th>
                                             <th>Order #</th>
 											<th>Transaction ID</th>
                                             <th>Product</th>
@@ -53,7 +54,6 @@ $cu = new Customer();
                                             <th>USD</th>
                                             <th>GHS</th>
                                             <th>Status</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,18 +63,15 @@ $cu = new Customer();
 										foreach($buyorder as $buy){
 										?>
                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td><?php echo $buy['id']; ?></td>
+                                            <td><a href="?page=buy&edit=<?php echo $buy['orderNumber']; ?>"> View </a></td>
                                             <td><?php echo $buy['orderNumber']; ?></td>
 											<td><?php echo $buy['transactionId']; ?></td>
                                         	<td><?php echo $buy['coinType']; ?></td>
                                             <td><?php echo $buy['orderDate']; ?></td>
 											<td><?php echo $buy['paymentType']."(".$buy['network'].")"; ?></td>
-                                        	<td><?php echo "$".$buy['paymentAmountUSD']; ?></td>
-                                        	<td><?php echo $buy['paymentAmountGHC']; ?></td>
-                                        	<td><span><?php if($buy['status'] == 0) echo "Awaiting
-Payment"; elseif($buy['status']==1) echo "Processing"; elseif($buy['status'] == 2) echo "Completed"; ?></span></td>
-                                            <td></td>
+                                        	<td><?php echo $hp->formatGHC($buy['paymentAmountUSD'],"USD"); ?></td>
+                                        	<td><?php echo $hp->formatGHC($buy['paymentAmountGHC'],"GHC"); ?></td>
+                                        	<td><span><?php echo $buy['transactionStatus']; ?></span></td>
                                         </tr>
 									<?php }}else{?>
                                         <tr><td colspan="11"><div class="alert alert-info text-center">No buy orders yet...</div></td></tr>
@@ -99,16 +96,14 @@ Payment"; elseif($buy['status']==1) echo "Processing"; elseif($buy['status'] == 
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>ID</th>
                                             <th>Order #</th>
-											<th>Transaction ID</th>
                                             <th>Product</th>
                                             <th>Date</th>
 											<th>Payment Type</th>
                                             <th>USD</th>
                                             <th>GHS</th>
                                             <th>Status</th>
-                                            <th></th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,18 +113,15 @@ Payment"; elseif($buy['status']==1) echo "Processing"; elseif($buy['status'] == 
                                               foreach($sellorder as $sell){
                                                 ?>
                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                        	<td><?php echo $sell['id']; ?></td>
+                                            <td><a href="?page=sell&edit=<?php echo $sell['orderNumber']; ?>"> View </a></td>
                                             <td><?php echo $sell['orderNumber']; ?></td>
-											<td><?php echo $sell['transactionId']; ?></td>
                                         	<td><?php echo $sell['coinType']; ?></td>
                                             <td><?php echo $sell['orderDate']; ?></td>
 											<td><?php echo $sell['paymentType']."(".$sell['network'].")"; ?></td>
-                                        	<td><?php echo $sell['paymentAmountUSD']; ?></td>
-                                        	<td><?php echo $sell['paymentAmountGHC']; ?></td>
-                                        	<td><span><?php if($sell['status'] == 0) echo "Awaiting
-Assets";elseif($sell['status']==1) echo "Processing"; elseif($sell['status'] == 2) echo "Completed"; ?></span></td>
-                                            <td></td>
+                                        	<td><?php echo $hp->formatGHC($sell['paymentAmountUSD'],"USD"); ?></td>
+                                        	<td><?php echo $hp->formatGHC($sell['paymentAmountGHC'],"GHC"); ?></td>
+                                        	<td><span><?php echo $sell['transactionStatus']; ?></span></td>
+                                            
                                         </tr>
                                         <?php }}else{?>
                                             <tr><td colspan="11"><div class="alert alert-info text-center">No sell orders yet...</div></td>

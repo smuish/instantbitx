@@ -24,9 +24,10 @@ if(isset($_POST['submit'])){
     $data['walletAddress'] = "";	
     $data['status'] = "";	
     $data['note'] = $_POST['note'];
+    $data['transactionStatus'] = "";
     $sales = new Order();
-    $sales->addDailySales($data);
-    $msg = "Order Added";
+   $msg =  $sales->addDailySales($data);
+    //$msg = "Order Added";
 
 }
 
@@ -45,7 +46,7 @@ if(isset($_POST['submit'])){
                             <div class="content">
                                 <form method="POST">
                                     <div>
-                                        <div><?php if(isset($msg)) echo $msg; ?></div>
+                                        <div><?php if(isset($msg)) echo $msg.$_POST['transactionId']; ?></div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Payment Mode:</label>

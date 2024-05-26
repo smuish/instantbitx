@@ -37,12 +37,13 @@ $dailySales = $sales->getDailySales();
                                             <th>Order Number</th>
                                             <th>Order Type</th>
                                             <th>Customer</th>
+                                            <th>Transaction ID</th>
                                             <th>Payment Method</th>
                                             <th>Amount (GHC)</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
-                                    </thead>
+                                    </thead> 
                                     <tbody>
                                         <?php 
                                         if(mysqli_affected_rows($GLOBALS['con']) > 0){
@@ -52,10 +53,11 @@ $dailySales = $sales->getDailySales();
                                             <td><input type="checkbox"></td>
                                             <td><?php echo $daily['orderNumber']; ?></td>
                                             <td><?php echo $daily['orderType']; ?></td>
-                                        	<td><a href=".?page=customerdetails">Joe</a></td>
+                                        	<td></td>
+                                            <td><?php echo $daily['transactionId']; ?></td>
                                             <td><?php echo $daily['paymentType']; ?></td>
                                             <td><?php echo $daily['paymentAmountGHC']; ?></td>
-                                        	<td><span><?php echo $daily['status'] == 0 ? "Pending" : "completed"; ?></span></td>
+                                        	<td><span><?php echo $daily['transactionStatus']; ?></span></td>
                                             <td></td>
                                         </tr>
                                             <?php
@@ -63,7 +65,6 @@ $dailySales = $sales->getDailySales();
                                         ?>
                                          <tr>
                                             <td colspan="13">There are no sales for today</td>
-                                            <td>08900000</td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>

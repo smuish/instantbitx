@@ -4,14 +4,14 @@ class User{
 
     public function newUser($data){
 
-        $user = mysqli_query($GLOBALS['con'], "INSERT INTO user (username, email, password, dateAdded, role, status, avatar) VALUES('$data->username' , '$data->email', PASSWORD('$data->password'), NOW(), '$data->role', 0, '$data->avatar')") or die(mysqli_error($GLOBAL['con']));
+        $user = mysqli_query($GLOBALS['con'], "INSERT INTO user (email, password, dateAdded, role, status, avatar) VALUES('$data->email', PASSWORD('$data->password'), NOW(), '$data->role', 0, '$data->avatar')") or die(mysqli_error($GLOBAL['con']));
         return;
 
     }
 
     public function login($data){
 
-        $sn = mysqli_query($GLOBALS['con'],"SELECT * FROM user where userName  = '$data->username' AND password = PASSWORD('$data->password')") or die(mysqli_error($GLOBALS['con']));
+        $sn = mysqli_query($GLOBALS['con'],"SELECT * FROM user where email  = '$data->email' AND password = PASSWORD('$data->password')") or die(mysqli_error($GLOBALS['con']));
         $a_sn = mysqli_affected_rows($GLOBALS['con']);
         if($a_sn > 0){
             return $sn;

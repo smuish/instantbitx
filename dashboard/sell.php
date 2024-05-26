@@ -22,6 +22,7 @@ $data['email'] = $_SESSION['email'];
  <div class="row">
   <div class="process">
    <div class="process-row nav nav-tabs">
+     <?php if(!isset($_GET['edit'])){?>
     <div class="process-step">
      <button type="button" class="btn btn-info btn-circle" data-toggle="tab" href="#menu1"><i class="fa fa-info fa-2x"></i></button>
      <p><small>Sell<br />Amount</small></p>
@@ -30,8 +31,9 @@ $data['email'] = $_SESSION['email'];
      <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu2"><i class="fa fa-credit-card fa-2x"></i></button>
      <p><small>Payment<br />Method</small></p>
     </div>
+    <?php } ?>
     <div class="process-step">
-     <button type="button" class="btn btn-default btn-circle" data-toggle="tab" href="#menu3"><i class="fa fa-ticket fa-2x"></i></button>
+     <button type="button" class="btn <?php echo isset($_GET['edit']) ? "btn-info" : "btn-default"; ?> btn-circle" data-toggle="tab" href="#menu3"><i class="fa <?php echo isset($_GET['edit']) ? "fa-info" : ""; ?> fa-ticket fa-2x"></i></button>
      <p><small>Transaction<br />Summary</small></p>
     </div>
     <div class="process-step">
@@ -49,6 +51,7 @@ $data['email'] = $_SESSION['email'];
    </div>
   </div>
   <div class="tab-content">
+    <?php if(!isset($_GET['edit'])){?>
    <div id="menu1" class="tab-pane fade active in">
     <div style="margin: 0 auto; max-width: 450px; border-radius: 10px; border: 1px dashed #ccc; padding: 10px;">
     <h3>How much do you want to sell?</h3>
@@ -79,8 +82,8 @@ $data['email'] = $_SESSION['email'];
     </ul>
     </div>
    </div>
-   <div id="menu2" class="tab-pane fade">
-   <div style="max-width: 500px; border: 1px dashed #ccc; border-radius: 10px; padding: 10px; margin: 0 auto;">
+<div id="menu2" class="tab-pane fade">
+    <div style="max-width: 500px; border: 1px dashed #ccc; border-radius: 10px; padding: 10px; margin: 0 auto;">
     <h3>Select Payment Method</h3>
     <p>Select how you want to receive payment</p>
     <p>
@@ -132,9 +135,10 @@ $data['email'] = $_SESSION['email'];
      <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-chevron-left"></i> Back</button></li>
      <li><button type="button" class="btn btn-info next-step">Next <i class="fa fa-chevron-right"></i></button></li>
     </ul>
-</div>
+    </div>
    </div>
-   <div id="menu3" class="tab-pane fade" style="text-align:center">
+   <?php } ?>
+   <div id="menu3" class="tab-pane fade <?php echo isset($_GET['edit']) ? "active in" : ""; ?>" style="text-align:center">
     <div style="max-width: 500px; border: 1px dashed #ccc; border-radius: 10px; padding: 10px; margin: 0 auto; text-align: left">
     <h3>Transaction Summary</h3>
     <div>
@@ -155,13 +159,13 @@ $data['email'] = $_SESSION['email'];
         <p><strong>Coin Type:</strong><span id="tscoinType"></span></p>
         <p><strong>Selling Amount (USD):</strong><span id="tssellAmountUSD"></span></p>
         <p><strong>Selling Amount (GHS):</strong><span id="tssellAmountGHC"></span></p>
-        <p><input type="button" class="btn btn-warning form-control" id="placeorderbtn" value="Place sell order" /></p>
+        <?php if(!isset($_GET['edit'])){?><p><input type="button" class="btn btn-warning form-control" id="placeorderbtn" value="Place sell order" /></p><?php } ?>
         
     </div> 
     </div>
     <div class="col-lg-12">
     <ul class="list-unstyled list-inline pull-right">
-     <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-chevron-left"></i> Back</button></li>
+    <?php if(!isset($_GET['edit'])){?> <li><button type="button" class="btn btn-default prev-step"><i class="fa fa-chevron-left"></i> Back</button></li><?php } ?>
      <li><button type="button" class="btn btn-info next-step">Next <i class="fa fa-chevron-right"></i></button></li>
     </ul>
     </div>

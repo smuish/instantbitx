@@ -141,6 +141,14 @@
                     </div> -->
                 </li>
 
+                <li class="active-pro">
+                    <a href="logout.php">
+                    <strong><i class="ti-power-off"></i>
+                        <p>Sign out</p>
+                    </strong>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
